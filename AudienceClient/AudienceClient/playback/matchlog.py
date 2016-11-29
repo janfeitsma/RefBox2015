@@ -110,15 +110,17 @@ class MatchLogPublisher():
         return (data, meta)
 
 
-    def getNearestEntry(data, time)
+    def getNearestEntry(data, ms):
+        #perfect match
+        if time in data:
+            return data[time]
 
         # look for nearest
         for i in range(len(data)):
-            if time in data:
-                return data[time]
-            if time in data:
-                return data[time]
-            i+=1
+            if time - i in data:
+                return data[time - i]
+            if time + i in data:
+                return data[time + i]
 
     def advance(self, t):
         """
@@ -159,8 +161,8 @@ class MatchLogPublisher():
             t = playback.updateTime(dt)
 
             # get nearest data
-            a = self.getNearestEntry(self.data_a, t)
-            print a
+            a = self.getNearestEntry(self.data_a, long(t * 1000.0))
+            b = self.getNearestEntry(self.data_b, long(t * 1000.0))
 
             # advance and publish
             #self.advance(t)
