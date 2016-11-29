@@ -164,10 +164,12 @@ class MatchLogPublisher():
             a = self.getNearestEntry(self.data_a, long(t * 1000.0))
             b = self.getNearestEntry(self.data_b, long(t * 1000.0))
 
+            #json.dump(a)
+
             # advance and publish
             #self.advance(t)
             # send msg buffer
-            self.conn.sendall(self.buffer) # TODO Erik convert buffer json
+            conn.sendall(self.buffer) # TODO Erik convert buffer json
             # sleep
             time.Clock.tick_busy_loop(self.frequency)
             if rospy.is_shutdown():
